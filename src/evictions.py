@@ -42,9 +42,44 @@ def lru(filePath):
         return missess
 
 
-def optff(file):
-    pass
-
+def optff(filePath):
+    with open(filePath) as f:
+        firstLine = f.readline().split()
+        k = int(firstLine[0])
+        m = int(firstLine[1])
+        reqs = [int(x) for x in f.readline().split()]
+        
+        indices = {}
+        for i, req in enumerate(reqs):
+            if req not in indices:
+                indices[req] = []
+            indices[req].append(i)
+        cache = []
+        misses = 0
+        for current_idx in range(m):
+            req = reqs[current_idx]
+            if req in cache:
+                pass
+            else:
+                misses += 1
+                if len(cache) < k:
+                    cache.append(req)
+                else:
+                    farthest = -1
+                    farthestIndex = -1
+                    for i in range(len(cache)):
+                        cachedReq = cache[i]
+                        next_occurrence = float('inf')
+                        for idx in indices[cachedReq]:
+                            if idx > current_idx:
+                                next_occurrence = idx
+                                break
+                        if next_occurrence > farthest:
+                            farthest = next_occurrence
+                            farthestIndex = i
+                    cache[farthestIndex] = req
+        return misses
+    
 def main():
     if len(sys.argv) != 2:
         print("Usage: py evictions.py <file>")
