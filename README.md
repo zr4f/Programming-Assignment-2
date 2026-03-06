@@ -10,6 +10,6 @@ The input file is formatted according to the programming 2 assignments instructi
 Instructions to reproduce the output:
 1) Make sure you are in the src folder 
 2) Make sure you have the filepath ready for the input file
-3) Run this command in the terminal: py evictions.py <filePath>
+3) Run this command in the terminal: py evictions.py \<filePath>
 
 Answers to the three questions will be found in the PDF titled "answers.pdf"
